@@ -1,7 +1,7 @@
 // public/service-worker.js
-const baseUrl = '/MonitorTimbrature';
 
 self.addEventListener('push', event => {
+	const baseUrl = '/MonitorTimbrature';
 	const payload = event.data ? event.data.text() : 'No Payload';
 	const options = {
 		body: payload,

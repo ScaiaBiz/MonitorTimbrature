@@ -6,7 +6,7 @@ self.addEventListener('push', event => {
 	const options = {
 		body: payload,
 		icon: `${baseUrl}/logo.png`,
-		badge: `/vite.svg`,
+		badge: `${baseUrl}/logo.png`,
 	};
 
 	event.waitUntil(self.registration.showNotification('Web Push', options));

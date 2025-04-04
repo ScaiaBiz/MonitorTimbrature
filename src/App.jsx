@@ -3,17 +3,18 @@ import './App.css';
 
 function App() {
 	const [count, setCount] = useState(0);
+	const [errorText, setErrorText] = useState('');
 
 	const askNotificationPermission = async () => {
-		console.log('permission');
 		const permission = await Notification.requestPermission();
-		console.log('permission', permission);
+		setErrorText(`permission: ${permission}`);
 		if (permission !== 'granted') {
 			alert('Permesso per le notifiche negato!');
 		}
 	};
 
 	const simulatePushNotification = () => {
+		setErrorText('Creo la notifica');
 		setTimeout(() => {
 			new Notification('Notifica simulata', {
 				body: 'Questa è una notifica di test ✨',
@@ -21,12 +22,13 @@ function App() {
 				badge: '/MonitorTimbrature/logo.png',
 			});
 			setCount(count => count + 1);
+			setErrorText(``);
 		}, 5000); // dopo 5 secondi
 	};
 
 	const handleClick = async e => {
 		e.preventDefault();
-		console.log('handleClick');
+		setErrorText('avvio richiesta permesso notifiche');
 		await askNotificationPermission();
 		simulatePushNotification();
 	};
@@ -38,6 +40,7 @@ function App() {
 			<div className='card'>
 				<p>Clicca su simula notifica</p>
 				<p>Notifiche inviate: {count}</p>
+				<p>{errorText}</p>
 			</div>
 		</>
 	);
